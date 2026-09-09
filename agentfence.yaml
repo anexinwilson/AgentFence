@@ -1,0 +1,58 @@
+# AgentFence Policy Configuration for agentfence
+project:
+  name: agentfence
+
+guardrails:
+  git:
+    block:
+      - push
+      - commit
+      - reset --hard
+      - clean -f
+      - rebase
+    allow_readonly: true
+    action: deny
+
+  files:
+    protected:
+      - ".env*"
+      - "secrets/**"
+      - "**/*.pem"
+      - "**/*.key"
+      - "credentials.json"
+    action: deny
+
+  commands:
+    block:
+      - "rm -rf *"
+      - "rm -rf /"
+      - "curl * | bash"
+      - "wget * | bash"
+    action: deny
+
+  placeholders:
+    block: true
+    scan_extensions:
+      - .go
+    action: fail
+
+  verification:
+    tests:
+      command: "go test ./..."
+      required: true
+      timeout: 60
+
+  requirements:
+    checklist:
+      - id: "R-01"
+        title: "Policy configuration loader"
+        evidence_file: "core/loader.go"
+      - id: "R-02"
+        title: "PreToolUse enforcement router"
+        evidence_file: "enforcement/router.go"
+      - id: "R-03"
+        title: "Stop verification engine"
+        evidence_file: "verification/engine.go"
+      - id: "R-04"
+        title: "CLI interface"
+        evidence_file: "cmd/agentfence/main.go"

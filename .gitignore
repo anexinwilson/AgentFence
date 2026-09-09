@@ -1,0 +1,57 @@
+# Binaries and executables
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+/agentfence
+/agentfence.exe
+
+# Test and coverage artifacts
+*.test
+*.test.exe
+*.out
+coverage.html
+profile.out
+
+# Go build caches and temporary directories
+.tmp/
+tmp/
+temp/
+go-build*/
+
+# Local scratchpad (experiments, junk tests, temporary drafts)
+scratch/*
+!scratch/README.md
+
+# AgentFence local runtime state
+.agentfence/
+
+# Environment files and credentials
+.env
+.env.*
+!*.env.example
+*.pem
+*.key
+credentials.json
+
+# IDE and Editor configurations
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+.agents/
+
